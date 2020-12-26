@@ -12,8 +12,17 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
-  getUsers(){
-    return this.http.get(`${this.url}/users`)
+  getUsers() {
+    return this.http.get(`${this.url}/users?delay=3`)
+      .pipe(
+        map(resp => {
+          return resp['data'];
+        })
+      );
+  }
+
+  getUserById(id) {
+    return this.http.get(`${this.url}/users/${id}?delay=3`)
       .pipe(
         map(resp => {
           return resp['data'];
